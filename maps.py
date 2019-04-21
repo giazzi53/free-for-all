@@ -18,7 +18,7 @@ class Map():
         self.bullets = []
         self.level = 1
         self.quant = 1
-        self.player = Player((500-70/2, 350-70/2), pygame.image.load('Characters/alien.png'))
+        self.player = Player((500-70/2, 350-70/2), pygame.image.load('Images/Characters/alien0.png'))
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.images = Images()
         self.bossTime = True

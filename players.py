@@ -15,10 +15,10 @@ class Player():
         self.vel = 7
         self.life = 5
         self.heartText = pygame.font.SysFont('arial', 30).render("Life: ", True, (0, 0, 0))
-        self.heartImage = pygame.image.load('Characters/heart.png')
+        self.heartImage = pygame.image.load('Images/Characters/heart.png')
         self.shots = []
         self.ammo = 10
-        self.ammoImage = pygame.image.load('Characters/ammo_amount.png')
+        self.ammoImage = pygame.image.load('Images/Characters/ammo_amount.png')
         self.ammoText = pygame.font.SysFont('arial', 21).render("Ammo:", True, (0, 0, 0))
         self.canSpawnBullets = True
         self.score = 0
@@ -42,7 +42,7 @@ class Player():
         if self.passo > 3:
             self.passo = 1
             
-        image = pygame.image.load('Characters/sprite' + str(self.passo) + '_player_' + str(self.grau) + '.png')      
+        image = pygame.image.load('Images/Characters/alien' + str(self.grau) + '.png')      
         self.setImage(image)
 
     def moveUp(self):

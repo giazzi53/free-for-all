@@ -20,7 +20,7 @@ game_map = Map()
 game_map.spawnAllies(1, game_map.images.getAngelingImages(), 1)
 game_map.spawnMonsters(1, game_map.images.getPoringImages(), 1, False)
 
-#image = pygame.image.load('Characters/sprite' + str(player1.passo) + '_player_' + str(player1.grau) + '.png')
+#image = pygame.image.load('Images/Characters/sprite' + str(player1.passo) + '_player_' + str(player1.grau) + '.png')
 
 
 while game_map.inGame:

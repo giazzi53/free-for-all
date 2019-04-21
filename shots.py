@@ -6,9 +6,9 @@ class Shot():
         self.position = position
         self.eixo = eixo
         if eixo == 'x':
-            self.img = pygame.image.load('Characters/shotX.png')
+            self.img = pygame.image.load('Images/Characters/shotX.png')
         else:
-            self.img = pygame.image.load('Characters/shotY.png')
+            self.img = pygame.image.load('Images/Characters/shotY.png')
         
         self.rect = pygame.Rect(position[0], position[1], self.img.get_width(), self.img.get_height())
         self.vel = vel * 30

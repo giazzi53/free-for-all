@@ -1,0 +1,4 @@
+Date:2017-11-05	Username:ooo	Level:4	Score1900
+Date:   2017-11-05	Username:   Hello	Level:   5	Score:   4700
+Date:   2017-11-12	Username:   Tinhoso	Level:   5	Score:   6600
+Date:   2017-11-12	Username:   Totoro	Level:   35	Score:   13300

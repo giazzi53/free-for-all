@@ -11,11 +11,11 @@ pygame.init()
 
 game_map = Map()
 
-##poring_right_image = [pygame.image.load('sprites_monsters/poring/right/frame_' + str(i) + '_delay-0.1s.png') for i in range(10)]
-##poring_left_image = [pygame.image.load('sprites_monsters/poring/left/frame_' + str(i) + '_delay-0.1s.png') for i in range(10)]
+##poring_right_image = [pygame.image.load('Images/sprites_monsters/poring/right/frame_' + str(i) + '_delay-0.1s.png') for i in range(10)]
+##poring_left_image = [pygame.image.load('Images/sprites_monsters/poring/left/frame_' + str(i) + '_delay-0.1s.png') for i in range(10)]
 ##
-##angeling_right_images = [pygame.image.load('sprites_allies/angeling/right/frame_' + str(i) + '_delay-0.15s.png') for i in range(27)]
-##angeling_left_images = [pygame.image.load('sprites_allies/angeling/left/frame_' + str(i) + '_delay-0.15s.png') for i in range(27)]
+##angeling_right_images = [pygame.image.load('Images/sprites_allies/angeling/right/frame_' + str(i) + '_delay-0.15s.png') for i in range(27)]
+##angeling_left_images = [pygame.image.load('Images/sprites_allies/angeling/left/frame_' + str(i) + '_delay-0.15s.png') for i in range(27)]
 
 game_map.spawnAllies(1, game_map.images.getAngelingImages(), 1)
 game_map.spawnMonsters(1, game_map.images.getPoringImages(), 1, False)

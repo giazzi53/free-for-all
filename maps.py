@@ -277,5 +277,6 @@ class Map():
                 pygame.quit()
             if event.type == pygame.MOUSEBUTTONUP:
                 pos = pygame.mouse.get_pos()
+                print(pos)
                 if(pos[0] >= 410 and pos[0] <= 630 and pos[1] >= 625 and pos[1] <= 690):
                     self.initialScreen = False

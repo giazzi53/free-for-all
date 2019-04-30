@@ -11,6 +11,7 @@ from bullets import Bullet
 SCREEN_HEIGHT = 700
 SCREEN_WIDTH = 1000
 
+#class Map(screenName, playerName1, playerName2):
 class Map():
 
     def __init__(self):
@@ -19,7 +20,10 @@ class Map():
         self.bullets = []
         self.level = 1
         self.quant = 1
-        self.player = Player((500-70/2, 350-70/2), pygame.image.load('sprites_player/sprite1_player_0.png'))
+        #self.playerName = 'alien'
+        #self.player1 = Player((100, 100), pygame.image.load('Images/Characters/' + 'alien0' + '.png'))
+        #self.player2 = Player((800, 800), pygame.image.load('Images/Characters/' + 'farmer0' + '.png'))
+        self.player = Player((100, 100), pygame.image.load('Images/Characters/' + 'farmer0' + '.png'))
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.images = Images()
         self.bossTime = True
@@ -34,7 +38,8 @@ class Map():
         self.backgroundIndex = 0
         self.winBackgroundImage = pygame.image.load('background_images/you_win.jpg')
         self.gameOverBackgroundImage = pygame.image.load('background_images/game_over.jpg')
-        self.initialBackgroundImage = pygame.image.load('background_images/initial.jpg')
+        self.initialBackgroundImage = pygame.image.load('background_images/initAll.jpg')
+        #self.backgrounds = [pygame.image.load('Images/Scenarios/' + screenName + '.png').convert_alpha()]
         self.backgrounds = [pygame.image.load('background_images/floresta.png').convert_alpha(), pygame.image.load('background_images/floresta_escura.png').convert_alpha(),
                             pygame.image.load('background_images/oceano.png').convert_alpha(), pygame.image.load('background_images/deserto.png').convert_alpha(),
                             pygame.image.load('background_images/metal.png').convert_alpha(), pygame.image.load('background_images/lava.png').convert_alpha(),
@@ -278,5 +283,21 @@ class Map():
             if event.type == pygame.MOUSEBUTTONUP:
                 pos = pygame.mouse.get_pos()
                 print(pos)
-                if(pos[0] >= 410 and pos[0] <= 630 and pos[1] >= 625 and pos[1] <= 690):
+
+            if event.type == pygame.QUIT:
+                game_map.inGame = False
+                game_map.windowClosed = True
+                pygame.quit()
+            if event.type == pygame.MOUSEBUTTONUP:
+                pos = pygame.mouse.get_pos()
+                if(pos[0] >= 340 and pos[0] <= 689 and pos[1] >= 518 and pos[1] <= 579):
+                #(340, 518)
+                #(689, 579)
+                    print('clicou no inicar')
                     self.initialScreen = False
+                elif(pos[0] >= 250 and pos[0] <= 779 and pos[1] >= 616 and pos[1] <= 678):
+                    #(250, 616)
+                    #(779, 678)
+                    print('clicou no instrucoes')
+                
+                    

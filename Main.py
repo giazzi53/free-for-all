@@ -11,6 +11,17 @@ pygame.mixer.music.load('audio/background_music.mp3')
 pygame.mixer.music.set_volume(0.1)
 pygame.mixer.music.play(-1)
 
+screenName = ''
+level = ''
+
+if level == 'easy':
+    screenName = 'ringue'
+elif level == 'medium':
+    screenName = 'floresta'
+else:
+    screenName = 'deserto'
+    
+#game_map = Map(screenName, playerName1, playerName2)
 game_map = Map()
 
 ##poring_right_image = [pygame.image.load('sprites_monsters/poring/right/frame_' + str(i) + '_delay-0.1s.png') for i in range(10)]
@@ -34,6 +45,10 @@ while not game_map.windowClosed:
     elif game_map.inGame:
         game_map.blitBackgroundMap()    
         
+        #game_map.player1.animatePlayerSprite()
+
+        #game_map.player2.animatePlayerSprite()
+
         game_map.player.animatePlayerSprite()
 
         game_map.shotsInteractions()

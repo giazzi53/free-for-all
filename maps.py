@@ -8,8 +8,8 @@ from players import Player
 from images_handler import Images
 from bullets import Bullet
 
-SCREEN_HEIGHT = 700
-SCREEN_WIDTH = 1000
+SCREEN_HEIGHT = 600
+SCREEN_WIDTH = 900
 
 #class Map(screenName, playerName1, playerName2):
 class Map():
@@ -31,6 +31,7 @@ class Map():
         self.win = False
         self.windowClosed = False
         self.initialScreen = True
+        #self.playerAndMapScreen = False
         self.showGuiLevel = True
         self.ranking = []
         self.setRank = True
@@ -38,7 +39,8 @@ class Map():
         self.backgroundIndex = 0
         self.winBackgroundImage = pygame.image.load('background_images/you_win.jpg')
         self.gameOverBackgroundImage = pygame.image.load('background_images/game_over.jpg')
-        self.initialBackgroundImage = pygame.image.load('background_images/initAll.jpg')
+        self.initialBackgroundImage = pygame.image.load('Images/Menus/initAll.jpg')
+        self.playerAndMapImage = pygame.image.load('Images/Menus/playerAndMap.jpg')
         #self.backgrounds = [pygame.image.load('Images/Scenarios/' + screenName + '.png').convert_alpha()]
         self.backgrounds = [pygame.image.load('background_images/floresta.png').convert_alpha(), pygame.image.load('background_images/floresta_escura.png').convert_alpha(),
                             pygame.image.load('background_images/oceano.png').convert_alpha(), pygame.image.load('background_images/deserto.png').convert_alpha(),
@@ -277,27 +279,54 @@ class Map():
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                game_map.inGame = False
+                game_map.windowClosed = True
+                pygame.quit()
+            if event.type == pygame.MOUSEBUTTONUP:
+                pos = pygame.mouse.get_pos()
+                if(pos[0] >= 306 and pos[0] <= 620 and pos[1] >= 444 and pos[1] <= 496):
+                    #(306, 444)
+                    #(620, 496)
+                    print('clicou no inicar')
+                    self.initialScreen = False
+                    self.inGame = False
+                    #self.playerAndMapScreen = True
+                    #self.inGame = False
+                elif(pos[0] >= 227 and pos[0] <= 700 and pos[1] >= 530 and pos[1] <= 580):
+                    #(227, 530)
+                    #(700, 580)
+                    print('clicou no instrucoes')
+
+    def playerAndMapScreen(self):
+        self.screen.blit(self.playerAndMapImage, (0, 0))
+        pygame.display.update()
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
                 self.inGame = False
                 self.windowClosed = True
                 pygame.quit()
             if event.type == pygame.MOUSEBUTTONUP:
                 pos = pygame.mouse.get_pos()
                 print(pos)
+                if(pos[0] >= 306 and pos[0] <= 620 and pos[1] >= 444 and pos[1] <= 496):
+                    #(306, 444)
+                    #(620, 496)
+                    print('clicou no hooligan')
+                #elif(pos[0] >= 227 and pos[0] <= 700 and pos[1] >= 530 and pos[1] <= 580):
+                    #(227, 530)
+                    #(700, 580)
+                    #print('clicou no farmer')
+                #self.initialScreen = False
+                #tratativa se ainda ao sleecionou dois jogadores e um mapa
+                #self.playerAndMapScreen = True
+                elif(pos[0] >= 306 and pos[0] <= 620 and pos[1] >= 535 and pos[1] <= 587):
+                    print("entrou no jogo")
+                    #(306, 535)
+                    #(620, 587)
+                    #self.initalScreen = False
+                    self.inGame = True
+                    self.initalScreen = False
 
-            if event.type == pygame.QUIT:
-                game_map.inGame = False
-                game_map.windowClosed = True
-                pygame.quit()
-            if event.type == pygame.MOUSEBUTTONUP:
-                pos = pygame.mouse.get_pos()
-                if(pos[0] >= 340 and pos[0] <= 689 and pos[1] >= 518 and pos[1] <= 579):
-                #(340, 518)
-                #(689, 579)
-                    print('clicou no inicar')
-                    self.initialScreen = False
-                elif(pos[0] >= 250 and pos[0] <= 779 and pos[1] >= 616 and pos[1] <= 678):
-                    #(250, 616)
-                    #(779, 678)
-                    print('clicou no instrucoes')
                 
                     

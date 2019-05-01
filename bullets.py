@@ -1,8 +1,8 @@
 import pygame
 import random as rd
 
-SCREEN_HEIGHT = 700
-SCREEN_WIDTH = 1000
+SCREEN_HEIGHT = 600
+SCREEN_WIDTH = 900
 
 class Bullet():
 

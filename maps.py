@@ -297,6 +297,9 @@ class Map():
                     #(700, 580)
                     print('clicou no instrucoes')
 
+    def instructionsScreem(self):
+        pass
+
     def playerAndMapScreen(self):
         self.screen.blit(self.playerAndMapImage, (0, 0))
         pygame.display.update()
@@ -308,20 +311,19 @@ class Map():
                 pygame.quit()
             if event.type == pygame.MOUSEBUTTONUP:
                 pos = pygame.mouse.get_pos()
-                print(pos)
-                if(pos[0] >= 306 and pos[0] <= 620 and pos[1] >= 444 and pos[1] <= 496):
-                    #(306, 444)
-                    #(620, 496)
-                    print('clicou no hooligan')
-                #elif(pos[0] >= 227 and pos[0] <= 700 and pos[1] >= 530 and pos[1] <= 580):
-                    #(227, 530)
-                    #(700, 580)
-                    #print('clicou no farmer')
+                print("pos",pos)
+                if(pos[0] >= 21 and pos[0] <= 254 and pos[1] >= 382 and pos[1] <= 486):
+                    
+                    print('clicou no Nivel facil')
+                elif(pos[0] >= 337 and pos[0] <= 542 and pos[1] >= 382 and pos[1] <= 486):
+                    print('clicou no Nivel Medio')
+                elif(pos[0] >= 628 and pos[0] <= 848 and pos[1] >= 382 and pos[1] <= 486):
+                    print('clicou no Nivel Dificl')
                 #self.initialScreen = False
                 #tratativa se ainda ao sleecionou dois jogadores e um mapa
                 #self.playerAndMapScreen = True
                 elif(pos[0] >= 306 and pos[0] <= 620 and pos[1] >= 535 and pos[1] <= 587):
-                    print("entrou no jogo")
+                    #print("entrou no jogo")
                     #(306, 535)
                     #(620, 587)
                     #self.initalScreen = False

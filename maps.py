@@ -20,6 +20,8 @@ class Map():
         self.bullets = []
         self.level = 1
         self.quant = 1
+        self.clicks = 0
+
         #self.playerName = 'alien'
         #self.player1 = Player((100, 100), pygame.image.load('Images/Characters/' + 'alien0' + '.png'))
         #self.player2 = Player((800, 800), pygame.image.load('Images/Characters/' + 'farmer0' + '.png'))
@@ -312,8 +314,21 @@ class Map():
             if event.type == pygame.MOUSEBUTTONUP:
                 pos = pygame.mouse.get_pos()
                 print("pos",pos)
+                
+                if(pos[0] >= 7 and pos[0] <= 202 and pos[1] >= 148 and pos[1] <= 286):
+                    print('escolheu o farmer')
+                    self.definePlayer('farmer0')
+                elif(pos[0] >= 220 and pos[0] <= 422 and pos[1] >= 148 and pos[1] <= 286):
+                    print('escolheu o hooligan')
+                    self.definePlayer('hooligan0')
+                elif(pos[0] >= 452 and pos[0] <= 647 and pos[1] >= 148 and pos[1] <= 286):
+                    print('escolheu o alien')
+                    self.definePlayer('alien0')
+                elif(pos[0] >= 668 and pos[0] <= 862 and pos[1] >= 148 and pos[1] <= 286):
+                    print('escolheu o r0b07')
+                    self.definePlayer('rb070')
+
                 if(pos[0] >= 21 and pos[0] <= 254 and pos[1] >= 382 and pos[1] <= 486):
-                    
                     print('clicou no Nivel facil')
                 elif(pos[0] >= 337 and pos[0] <= 542 and pos[1] >= 382 and pos[1] <= 486):
                     print('clicou no Nivel Medio')
@@ -329,6 +344,14 @@ class Map():
                     #self.initalScreen = False
                     self.inGame = True
                     self.initalScreen = False
+
+    def definePlayer(self, imageName):
+        self.clicks+=1
+        if(self.clicks == 1):
+            self.player1 = Player((100, 100), pygame.image.load('Images/Characters/' + imageName + '.png'))
+        elif(self.clicks == 2):
+            self.player2 = Player((800, 800), pygame.image.load('Images/Characters/' + imageName + '.png'))
+            self.clicks = 0
 
                 
                     

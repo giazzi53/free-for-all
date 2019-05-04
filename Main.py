@@ -39,16 +39,16 @@ game_map.spawnMonsters(1, game_map.images.getPoringImages(), 1, False)
 while not game_map.windowClosed:
     pygame.time.Clock().tick(30)
     game_map.screen.fill((255, 255, 255))
-    print("initialScreen = " , game_map.initalScreen)
-    print("inGame = ", game_map.inGame)
+    #print("initialScreen = " , game_map.initalScreen)
+    #print("inGame = ", game_map.inGame)
     if game_map.initialScreen:
-        print("initial screen")
+        #print("initial screen")
         game_map.initalScreen()
     elif game_map.playerAndMapScreen:
-        print("player and map screen")
+        #print("player and map screen")
         game_map.playerAndMapScreen()
     elif game_map.inGame:
-        print("game screen")
+        #print("game screen")
         game_map.blitBackgroundMap()    
         
         #game_map.player1.animatePlayerSprite()

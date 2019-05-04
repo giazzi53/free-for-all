@@ -38,7 +38,7 @@ class Map():
         self.winBackgroundImage = pygame.image.load('background_images/you_win.jpg')
         self.gameOverBackgroundImage = pygame.image.load('background_images/game_over.jpg')
         self.initialBackgroundImage = pygame.image.load('Images/Menus/initAll.jpg')
-        self.player1AndMapImage = pygame.image.load('Images/Menus/playerAndMap.jpg')
+        self.playerAndMapImage = pygame.image.load('Images/Menus/playerAndMap.jpg')
         self.scenario = None
 
     def spawnMonsters(self, amount, image, life, isBoss):
@@ -290,7 +290,7 @@ class Map():
         pass
 
     def playerAndMapScreen(self):
-        self.screen.blit(self.player1AndMapImage, (0, 0))
+        self.screen.blit(self.playerAndMapImage, (0, 0))
         pygame.display.update()
         
         for event in pygame.event.get():

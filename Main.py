@@ -11,16 +11,6 @@ pygame.mixer.music.load('audio/background_music.mp3')
 pygame.mixer.music.set_volume(0.1)
 pygame.mixer.music.play(-1)
 
-screenName = ''
-level = ''
-
-if level == 'easy':
-    screenName = 'ringue'
-elif level == 'medium':
-    screenName = 'floresta'
-else:
-    screenName = 'deserto'
-    
 #game_map = Map(screenName, playerName1, playerName2)
 game_map = Map()
 
@@ -39,23 +29,19 @@ game_map.spawnMonsters(1, game_map.images.getPoringImages(), 1, False)
 while not game_map.windowClosed:
     pygame.time.Clock().tick(30)
     game_map.screen.fill((255, 255, 255))
-    # print("initialScreen = " , game_map.initalScreen)
-    # print("inGame = ", game_map.inGame)
+
     if game_map.initialScreen:
-        # print("initial screen")
         game_map.initalScreen()
-    elif game_map.playerAndMapScreen:
-        # print("player and map screen")
+
+    elif game_map.selectScreen:
         game_map.playerAndMapScreen()
+    
     elif game_map.inGame:
-        # print("game screen")
-        game_map.blitBackgroundMap()    
+        game_map.blitBackgroundMap()   
         
-        #game_map.player1.animatePlayerSprite()
+        game_map.player1.animatePlayerSprite()
 
-        #game_map.player2.animatePlayerSprite()
-
-        game_map.player.animatePlayerSprite()
+        game_map.player2.animatePlayerSprite()
 
         game_map.shotsInteractions()
 
@@ -72,6 +58,7 @@ while not game_map.windowClosed:
         game_map.showGuiLevelMap()
 
         pygame.display.update()
+   
     else:
         game_map.endOfGame()
 

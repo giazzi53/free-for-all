@@ -6,9 +6,10 @@ SCREEN_WIDTH = 1000
 
 class Player():
 
-    def __init__(self, position, img):
+    def __init__(self, position, img, imageName):
         self.position = position
         self.img = img
+        self.imageName = imageName
         self.rect = pygame.Rect(position[0]+8, position[1]+5, img.get_width()-16, img.get_height()-10)
         self.grau = 0
         self.passo = 1
@@ -43,7 +44,7 @@ class Player():
         if self.passo > 3:
             self.passo = 1
             
-        image = pygame.image.load('sprites_player/sprite' + str(self.passo) + '_player_' + str(self.grau) + '.png')      
+        image = pygame.image.load('Images/Characters/' + self.imageName + str(self.grau) + '.png') 
         self.setImage(image)
 
     def moveUp(self):

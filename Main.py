@@ -20,8 +20,8 @@ game_map = Map()
 ##angeling_right_images = [pygame.image.load('sprites_allies/angeling/right/frame_' + str(i) + '_delay-0.15s.png') for i in range(27)]
 ##angeling_left_images = [pygame.image.load('sprites_allies/angeling/left/frame_' + str(i) + '_delay-0.15s.png') for i in range(27)]
 
-game_map.spawnAllies(1, game_map.images.getAngelingImages(), 1)
-game_map.spawnMonsters(1, game_map.images.getPoringImages(), 1, False)
+#game_map.spawnAllies(1, game_map.images.getAngelingImages(), 1)
+#game_map.spawnMonsters(1, game_map.images.getJoaoLourao(), 1, False)
 
 #image = pygame.image.load('sprites_player/sprite' + str(player1.passo) + '_player_' + str(player1.grau) + '.png')
 
@@ -48,10 +48,12 @@ while not game_map.windowClosed:
         game_map.bulletsInteractions()
         
         game_map.monstersInteractions()
+
+        game_map.generateMonsters()
                         
-        game_map.alliesInteractions()
+        #game_map.alliesInteractions()
                         
-        game_map.checkEndOfLevel()
+        #game_map.checkEndOfLevel()
 
         game_map.showPlayerInfos()
 

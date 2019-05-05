@@ -39,7 +39,6 @@ class Monster():
             self.rect.y -= self.vel
 
     def drawMonster(self, screen):
-        #pygame.draw.rect(screen, (0, 0, 0), self.rect) #debug
         screen.blit(self.lifeText, (self.position[0]+(self.img_width/5), self.position[1]-(self.img_height/2)))
         if self.direction:
             screen.blit(self.img_right[self.index], self.position)

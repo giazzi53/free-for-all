@@ -195,7 +195,7 @@ class Map():
                 elif(pos[0] >= 227 and pos[0] <= 700 and pos[1] >= 530 and pos[1] <= 580):
                     print('clicou no instrucoes')
 
-    def instructionsScreem(self):
+    def instructionsScreen(self):
         pass
 
     def playerAndMapScreen(self):
@@ -246,6 +246,21 @@ class Map():
     def defineScenario(self, scenario):
         self.scenario = scenario
         self.scenarioSelected = True
+
+    def generateBarriers(self):
+        if self.scenario == 'ringue':
+            self.screen.blit(self.images.getChair(), (220, 220))
+            self.screen.blit(self.images.getBelt(), (420, 220))
+        elif self.scenario == 'floresta':
+            self.screen.blit(self.images.getTrunk(), (220, 220))
+            self.screen.blit(self.images.getTree(), (420, 220))
+            self.screen.blit(self.images.getLake(), (620, 220))
+        elif self.scenario == 'deserto':
+            self.screen.blit(self.images.getSand(), (220, 220))
+            self.screen.blit(self.images.getCactus(), (420, 220))
+            self.screen.blit(self.images.getRock(), (620, 220))
+            
+            
 
                 
                     

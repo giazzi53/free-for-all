@@ -37,6 +37,8 @@ while not game_map.windowClosed:
         game_map.monstersInteractions()
 
         game_map.generateMonsters()
+
+        game_map.generateBarriers()
                     
         game_map.showPlayerInfos()
 

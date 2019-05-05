@@ -116,4 +116,4 @@ class Player():
         self.scoreText = pygame.font.SysFont('arial', 30).render("Score: " + str(self.score), True, (0, 0, 0))
 
     def showScore(self, screen):
-        screen.blit(self.scoreText, (850 , 7))
+        screen.blit(self.scoreText, (780 , 7))

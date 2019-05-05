@@ -77,5 +77,3 @@ while not game_map.windowClosed:
                     game_map.spawnMonsters(1, game_map.images.getPoringImages(), 1, False)
 
     game_map.checkEvents()
-
-    

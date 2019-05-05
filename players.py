@@ -1,15 +1,16 @@
 import pygame
 from shots import Shot
 
-SCREEN_HEIGHT = 700
-SCREEN_WIDTH = 1000
+SCREEN_HEIGHT = 600
+SCREEN_WIDTH = 900
 
 class Player():
 
-    def __init__(self, position, img, imageName):
+    def __init__(self, position, img, imageName, shotName):
         self.position = position
         self.img = img
         self.imageName = imageName
+        self.shotName = shotName
         self.rect = pygame.Rect(position[0]+8, position[1]+5, img.get_width()-16, img.get_height()-10)
         self.grau = 0
         self.passo = 1
@@ -73,12 +74,6 @@ class Player():
     def damagePlayer(self, amount):
         self.life -= amount
 
-    def healPlayer(self, amount):
-        if self.life < 5:
-            self.life += amount
-        else:
-            self.addScore(1000)
-
     def isPlayerDead(self):
         return self.life <= 0
 
@@ -92,13 +87,13 @@ class Player():
             self.shotAudio.play()
             self.ammo -= 1
             if self.grau == 0:
-                self.shots.append(Shot((self.position[0]+40, self.position[1]), 'y', -1))
+                self.shots.append(Shot((self.position[0]+40, self.position[1]), 'y', -1, self.shotName + str(self.grau)))
             elif self.grau == 180:
-                self.shots.append(Shot((self.position[0]+20, self.position[1]+40), 'y',  1)) 
+                self.shots.append(Shot((self.position[0]+20, self.position[1]+40), 'y',  1, self.shotName + str(self.grau))) 
             elif self.grau == 90:
-                self.shots.append(Shot((self.position[0]+40, self.position[1]+40), 'x',  1))
+                self.shots.append(Shot((self.position[0]+40, self.position[1]+40), 'x',  1, self.shotName + str(self.grau)))
             else:
-                self.shots.append(Shot((self.position[0], self.position[1]+20), 'x', -1))
+                self.shots.append(Shot((self.position[0], self.position[1]+20), 'x', -1, self.shotName + str(self.grau)))
             if self.ammo == 0 and self.canSpawnBullets:
                 game_map.spawnBullets(4)
                 self.canSpawnBullets = False

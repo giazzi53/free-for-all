@@ -2,14 +2,10 @@ import pygame
 
 class Shot():
 
-    def __init__(self, position, eixo, vel):
+    def __init__(self, position, eixo, vel, shotName):
         self.position = position
         self.eixo = eixo
-        if eixo == 'x':
-            self.img = pygame.image.load('sprites_player/shotX.png')
-        else:
-            self.img = pygame.image.load('sprites_player/shotY.png')
-        
+        self.img = pygame.image.load('Images/Characters/' + shotName + '.png')
         self.rect = pygame.Rect(position[0], position[1], self.img.get_width(), self.img.get_height())
         self.vel = vel * 30
 

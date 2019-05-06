@@ -18,7 +18,7 @@ class Map():
         self.allies = []
         self.bullets = []
         self.level = 1
-        self.quant = 1
+        self.quant = 0
         self.clicks = 0
         self.playersSelected = False
         self.scenarioSelected = False
@@ -42,6 +42,7 @@ class Map():
         self.scenario = None
 
     def spawnMonsters(self, amount, image, life, isBoss):
+        
         for i in range(amount):
             #monsters spawn at left side
             #self.monsters.append(Monster((rd.randint(-(70+(30*amount)), -70), rd.randint(0, 700)), image, life, isBoss))
@@ -54,20 +55,26 @@ class Map():
 
     def generateMonsters(self):
         if self.scenario == 'ringue':
-            if(self.quant <= 4): 
-                self.spawnMonsters(1, self.images.getJoaoLourao(), 1, False)
-                self.spawnMonsters(1, self.images.getMikeTyson(), 1, False)
-                self.quant+=2
+            if(self.quant <= 2): 
+                randomAmount1 = rd.randint(1, 3)
+                self.spawnMonsters(randomAmount1, self.images.getJoaoLourao(), 1, False)
+                randomAmount2 = rd.randint(1, 3)
+                self.spawnMonsters(randomAmount2, self.images.getMikeTyson(), 1, False)
+                self.quant += (randomAmount1 + randomAmount2)
         elif self.scenario == 'floresta':
-            if(self.quant <= 4): 
-                self.spawnMonsters(1, self.images.getJaguar(), 1, False)
-                self.spawnMonsters(1, self.images.getSnake(), 1, False)
-                self.quant+=2
+            if(self.quant <= 3): 
+                randomAmount1 = rd.randint(1, 4)
+                self.spawnMonsters(randomAmount1, self.images.getJaguar(), 1, False)
+                randomAmount2 = rd.randint(1, 4)
+                self.spawnMonsters(randomAmount2, self.images.getSnake(), 1, False)
+                self.quant += (randomAmount1 + randomAmount2)
         elif self.scenario == 'deserto':
             if(self.quant <= 4): 
-                self.spawnMonsters(1, self.images.getScorpion(), 1, False)
-                self.spawnMonsters(1, self.images.getMummy(), 1, False)
-                self.quant+=2
+                randomAmount1 = rd.randint(1, 5)
+                self.spawnMonsters(randomAmount1, self.images.getScorpion(), 1, False)
+                randomAmount2 = rd.randint(1, 5)
+                self.spawnMonsters(randomAmount2, self.images.getMummy(), 1, False)
+                self.quant += (randomAmount1 + randomAmount2)
       #for i in range(3):
             #del self.monsters[rd.randint(0, len(self.monsters)-1)]
         #self.monsters[0].changeMonsterVelocity(3)
@@ -107,6 +114,7 @@ class Map():
                         if monster.isDead():
                             self.monsters.remove(monster)
                             self.player1.addScore(100)
+                            self.quant-=1
                         self.player1.shots.remove(shot)
 
     def bulletsInteractions(self):

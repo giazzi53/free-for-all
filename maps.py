@@ -30,12 +30,14 @@ class Map():
         self.windowClosed = False
         self.initialScreen = True
         self.selectScreen = False
+        self.instructionsScreen = False
         self.showGuiLevel = True
         self.ranking = []
         self.setRank = True
         self.start_time = time.time()
         self.backgroundIndex = 0
         self.winBackgroundImage = pygame.image.load('background_images/you_win.jpg')
+        self.instructionBackgroundImage = pygame.image.load('Images/Menus/instructionsScreen.png')
         self.gameOverBackgroundImage = pygame.image.load('background_images/game_over.jpg')
         self.initialBackgroundImage = pygame.image.load('Images/Menus/initAll.jpg')
         self.playerAndMapImage = pygame.image.load('Images/Menus/playerAndMap.jpg')
@@ -201,11 +203,25 @@ class Map():
                     self.initialScreen = False
                     self.selectScreen = True
                 elif(pos[0] >= 227 and pos[0] <= 700 and pos[1] >= 530 and pos[1] <= 580):
-                    print('clicou no instrucoes')
+                    self.initialScreen = False
+                    self.instructionsScreen = True
 
-    def instructionsScreen(self):
-        pass
-
+    def instructionScreen(self):
+        self.screen.blit(self.instructionBackgroundImage,(0,0))
+        pygame.display.update()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.inGame = False
+                self.windowClosed = True
+                pygame.quit()
+            if event.type == pygame.MOUSEBUTTONUP:
+                pos = pygame.mouse.get_pos()   
+                print(pos)
+                if(pos[0] >= 234 and pos[0] <= 726 and pos[1] >= 481 and pos[1] <= 554):
+                    self.initialScreen = True
+                    self.instructionsScreen = False
+                    print("Voltar")
+                 
     def playerAndMapScreen(self):
         self.screen.blit(self.playerAndMapImage, (0, 0))
         pygame.display.update()

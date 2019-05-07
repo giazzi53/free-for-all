@@ -22,7 +22,10 @@ while not game_map.windowClosed:
 
     elif game_map.selectScreen:
         game_map.playerAndMapScreen()
-    
+
+    elif game_map.instructionsScreen:
+        game_map.instructionScreen()
+
     elif game_map.inGame:
         game_map.blitBackgroundMap()   
         

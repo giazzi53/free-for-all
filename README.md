@@ -1,5 +1,5 @@
-# Pygame-LP1
-Projeto de jogo de laboratório de programação I
+# Free for All
+Projeto de jogos Digitais
 
 ![Screenshot 1](https://github.com/fernandofc16/Pygame-LP1/blob/master/screen_shots/Pygame1_screenshot1.png)
 

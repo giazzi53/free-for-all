@@ -7,6 +7,7 @@ from monsters import Monster
 from players import Player
 from images_handler import Images
 from bullets import Bullet
+from barriers import Barrier
 
 SCREEN_HEIGHT = 600
 SCREEN_WIDTH = 900
@@ -17,6 +18,7 @@ class Map():
         self.monsters = []
         self.allies = []
         self.bullets = []
+        self.barriers = []
         self.level = 1
         self.quant = 0
         self.clicks = 0
@@ -109,6 +111,9 @@ class Map():
                 self.monsters.remove(monster)
                 if(self.player1.isPlayerDead()):
                     self.inGame = False
+
+                
+
             else:
                 for shot in self.player1.shots:
                     if shot.is_collided_with(monster):
@@ -118,6 +123,8 @@ class Map():
                             self.player1.addScore(100)
                             self.quant-=1
                         self.player1.shots.remove(shot)
+
+            
 
     def bulletsInteractions(self):
         for bullet in self.bullets:
@@ -272,17 +279,7 @@ class Map():
         self.scenarioSelected = True
 
     def generateBarriers(self):
-        if self.scenario == 'ringue':
-            self.screen.blit(self.images.getChair(), (220, 220))
-            self.screen.blit(self.images.getBelt(), (420, 220))
-        elif self.scenario == 'floresta':
-            self.screen.blit(self.images.getTrunk(), (220, 220))
-            self.screen.blit(self.images.getTree(), (420, 220))
-            self.screen.blit(self.images.getLake(), (620, 220))
-        elif self.scenario == 'deserto':
-            self.screen.blit(self.images.getSand(), (220, 220))
-            self.screen.blit(self.images.getCactus(), (420, 220))
-            self.screen.blit(self.images.getRock(), (620, 220))
+        self.barriers.append(Barrier(self))
             
             
 

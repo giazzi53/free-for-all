@@ -15,6 +15,7 @@ SCREEN_WIDTH = 900
 class Map():
 
     def __init__(self):
+        self.barriersExist = False
         self.monsters = []
         self.allies = []
         self.bullets = []
@@ -57,6 +58,25 @@ class Map():
             #monsters spawn at bot side
             #self.monsters.append(Monster((rd.randint(0, 1000), rd.randint(770, 770+(30*amount))), image, life, isBoss))
 
+    def spawnBarrier(self,image,position):
+        self.barriers.append(Barrier(self,image,position))            
+
+    def generateBarriers(self):
+        if(self.scenario == 'ringue'):
+            self.spawnBarrier(self.images.getChair(),(rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
+            self.spawnBarrier(self.images.getBelt(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
+            
+        elif self.scenario == 'floresta':
+            self.spawnBarrier(self.images.getTrunk(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
+            self.spawnBarrier(self.images.getTree(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
+            self.spawnBarrier(self.images.getLake(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
+            
+        elif self.scenario == 'deserto':
+            self.spawnBarrier(self.images.getSand(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
+            self.spawnBarrier(self.images.getCactus(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
+            self.spawnBarrier(self.images.getRock(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
+            
+
     def generateMonsters(self):
         if self.scenario == 'ringue':
             if(self.quant <= 2): 
@@ -97,6 +117,15 @@ class Map():
 
     def blitBackgroundMap(self):
         self.screen.blit(pygame.image.load('Images/Scenarios/' + self.scenario + '.png'), (0, 0))
+
+
+    def barriersInteractions(self):
+        print(self.barriers)
+        for barrier in self.barriers:
+            barrier.drawBarrier(self.screen)
+            if self.player1.is_collided_with(barrier):
+                print("ENCOSTOU")
+
 
     def monstersInteractions(self):
         for monster in self.monsters:
@@ -278,8 +307,7 @@ class Map():
         self.scenario = scenario
         self.scenarioSelected = True
 
-    def generateBarriers(self):
-        self.barriers.append(Barrier(self))
+    
             
             
 

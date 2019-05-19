@@ -118,7 +118,6 @@ class Map():
     def blitBackgroundMap(self):
         self.screen.blit(pygame.image.load('Images/Scenarios/' + self.scenario + '.png'), (0, 0))
 
-
     def barriersInteractions(self):
         print(self.barriers)
         for barrier in self.barriers:
@@ -302,6 +301,10 @@ class Map():
         self.scenario = scenario
         self.scenarioSelected = True
 
+    '''def spawnSpecialItems(self, scenario):
+        if self.scenario == 'ringue':
+            self.screen.blit(pygame.image.load('Images/Scenarios/' + self.scenario + '.png'), (0, 0))
+    '''
     
             
             

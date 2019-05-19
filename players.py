@@ -20,7 +20,7 @@ class Player():
         self.heartImage = pygame.image.load('sprites_player/heart.png')
         self.shots = []
         self.ammo = 10
-        self.ammoImage = pygame.image.load('sprites_player/ammo_amount.png')
+        self.ammoImage = pygame.image.load('Images/Special items/ammo_amount.png')
         self.ammoText = pygame.font.SysFont('arial', 21).render("Ammo:", True, (0, 0, 0))
         self.canSpawnBullets = True
         self.score = 0

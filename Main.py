@@ -31,8 +31,6 @@ while not game_map.windowClosed:
         
         game_map.player1.animatePlayerSprite()
 
-        game_map.player2.animatePlayerSprite()
-
         game_map.shotsInteractions()
 
         game_map.bulletsInteractions()
@@ -59,7 +57,7 @@ while not game_map.windowClosed:
                 pos = pygame.mouse.get_pos()
                 if(pos[0] >= 380 and pos[0] <= 600 and pos[1] >= 630 and pos[1] <= 690):
                     game_map = Map()
-                    game_map.spawnAllies(1, game_map.images.getAngelingImages(), 1)
+                    #game_map.spawnAllies(1, game_map.images.getAngelingImages(), 1)
                     game_map.spawnMonsters(1, game_map.images.getPoringImages(), 1, False)
 
     game_map.checkEvents()

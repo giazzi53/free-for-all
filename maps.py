@@ -17,7 +17,7 @@ class Map():
     def __init__(self):
         self.barriersExist = False
         self.monsters = []
-        self.allies = []
+        #self.allies = []
         self.bullets = []
         self.barriers = []
         self.level = 1
@@ -295,13 +295,8 @@ class Map():
                         self.selectScreen = False
 
     def definePlayer(self, imageName, shotName):
-        self.clicks+=1
-        if(self.clicks == 1):
-            self.player1 = Player((100, 100), pygame.image.load('Images/Characters/' + imageName + '0.png'), imageName, shotName)
-        elif(self.clicks == 2):
-            self.player2 = Player((800, 800), pygame.image.load('Images/Characters/' + imageName + '0.png'), imageName, shotName)
-            self.playersSelected = True
-            self.clicks = 0
+        self.player1 = Player((100, 100), pygame.image.load('Images/Characters/' + imageName + '0.png'), imageName, shotName)
+        self.playersSelected = True
 
     def defineScenario(self, scenario):
         self.scenario = scenario

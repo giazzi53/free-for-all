@@ -17,7 +17,7 @@ class Player():
         self.vel = 7
         self.life = 5
         self.heartText = pygame.font.SysFont('arial', 30).render("Life: ", True, (0, 0, 0))
-        self.heartImage = pygame.image.load('sprites_player/heart.png')
+        self.heartImage = pygame.image.load('Images/Special items/heart.png')
         self.shots = []
         self.ammo = 10
         self.ammoImage = pygame.image.load('Images/Special items/ammo_amount.png')
@@ -25,7 +25,7 @@ class Player():
         self.canSpawnBullets = True
         self.score = 0
         self.scoreText = pygame.font.SysFont('arial', 30).render("Score: " + str(self.score), True, (0, 0, 0))
-        self.shotAudio = pygame.mixer.Sound('audio/shot.wav')
+        self.shotAudio = pygame.mixer.Sound('Images/Audio/shot.wav')
   
     def setPosition(self, position):
         self.position = position

@@ -39,9 +39,9 @@ class Map():
         self.setRank = True
         self.start_time = time.time()
         self.backgroundIndex = 0
-        self.winBackgroundImage = pygame.image.load('background_images/you_win.jpg')
+        self.winBackgroundImage = pygame.image.load('Images/Menus/you_win.jpg')
         self.instructionBackgroundImage = pygame.image.load('Images/Menus/instructionsScreen.png')
-        self.gameOverBackgroundImage = pygame.image.load('background_images/game_over.jpg')
+        self.gameOverBackgroundImage = pygame.image.load('Images/Menus/game_over.jpg')
         self.initialBackgroundImage = pygame.image.load('Images/Menus/initAll.jpg')
         self.playerAndMapImage = pygame.image.load('Images/Menus/playerAndMap.jpg')
         self.scenario = None

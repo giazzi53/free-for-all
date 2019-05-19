@@ -63,19 +63,24 @@ class Map():
         self.barriers.append(Barrier(self,image,position))            
 
     def generateBarriers(self):
-        if(self.scenario == 'ringue'):
-            self.spawnBarrier(self.images.getChair(),(rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
-            self.spawnBarrier(self.images.getBelt(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
-            
-        elif self.scenario == 'floresta':
-            self.spawnBarrier(self.images.getTrunk(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
-            self.spawnBarrier(self.images.getTree(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
-            self.spawnBarrier(self.images.getLake(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
-            
-        elif self.scenario == 'deserto':
-            self.spawnBarrier(self.images.getSand(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
-            self.spawnBarrier(self.images.getCactus(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
-            self.spawnBarrier(self.images.getRock(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
+        if(self.barriersExist == False):
+            if(self.scenario == 'ringue'):
+                print("Ringue")
+                self.spawnBarrier(self.images.getChair(),(rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
+                self.spawnBarrier(self.images.getBelt(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
+                self.barriersExist = True
+                
+            elif self.scenario == 'floresta':
+                self.spawnBarrier(self.images.getTrunk(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
+                self.spawnBarrier(self.images.getTree(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
+                self.spawnBarrier(self.images.getLake(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
+                self.barriersExist = True
+
+            elif self.scenario == 'deserto':
+                self.spawnBarrier(self.images.getSand(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
+                self.spawnBarrier(self.images.getCactus(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
+                self.spawnBarrier(self.images.getRock(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
+                self.barriersExist = True
             
 
     def generateMonsters(self):
@@ -121,11 +126,16 @@ class Map():
         self.screen.blit(pygame.image.load('Images/Scenarios/' + self.scenario + '.png'), (0, 0))
 
     def barriersInteractions(self):
-        print(self.barriers)
         for barrier in self.barriers:
             barrier.drawBarrier(self.screen)
             if self.player1.is_collided_with(barrier):
-                print("ENCOSTOU")
+                print(self.player1.position)
+                self.player1.position = list(self.player1.position)
+                self.player1.position[0] -= 10 
+                self.player1.position[1] -= 10
+                self.player1.position = tuple(self.player1.position)
+
+                print(self.player1.position)
 
 
     def monstersInteractions(self):

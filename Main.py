@@ -42,9 +42,10 @@ while not game_map.windowClosed:
         game_map.generateMonsters()
 
         game_map.generateBarriers()
-                    
-        game_map.showPlayerInfos()
 
+        game_map.barriersInteractions()
+
+        game_map.showPlayerInfos()
         pygame.display.update()
    
     else:

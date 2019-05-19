@@ -11,12 +11,14 @@ position3 = (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30))
 
 class Barrier():
     def __init__(self,maps,img,position):
-        self.images = Images()
+        self.image = img
         self.position = position
-        
+        self.img_width = self.image.get_width()
+        self.img_height = self.image.get_height()
+        self.rect = pygame.Rect(position[0]+5, position[1]+5, self.img_width-10, self.img_height-10)
 
-        def drawBarrier(self, screen):
-            screen.blit(img,position)
+    def drawBarrier(self, screen):
+        screen.blit(self.image,self.position)
 
             # if self.direction:
             #     screen.blit(self.img_right[self.index], self.position)

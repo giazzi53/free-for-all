@@ -16,7 +16,7 @@ class Monster():
         self.animationFrames = len(self.img_right)
         self.life = life
         self.initialLife = life
-        self.lifeText = pygame.font.SysFont('arial', 21).render(str(self.life) + "/" + str(self.initialLife), True, (0, 0, 0))
+        #self.lifeText = pygame.font.SysFont('arial', 21).render(str(self.life) + "/" + str(self.initialLife), True, (0, 0, 0))
         self.isBoss = isBoss
         self.dieAudio = pygame.mixer.Sound('Audio/enemy_hurt.wav')
         self.damageAudio = pygame.mixer.Sound('Audio/player_hurt.wav')
@@ -38,7 +38,7 @@ class Monster():
             self.rect.y -= self.vel
 
     def drawMonster(self, screen):
-        screen.blit(self.lifeText, (self.position[0]+(self.img_width/5), self.position[1]-(self.img_height/2)))
+        #screen.blit(self.lifeText, (self.position[0]+(self.img_width/5), self.position[1]-(self.img_height/2)))
         if self.direction:
             screen.blit(self.img_right[self.index], self.position)
         else:
@@ -53,9 +53,11 @@ class Monster():
     def damageMonster(self, amount):
         self.life -= amount
         if self.life == 1 and self.initialLife > 1:
-            self.lifeText = pygame.font.SysFont('arial', 21).render(str(self.life) + "/" + str(self.initialLife), True, (255, 0, 0))
+            a = 1
+            #self.lifeText = pygame.font.SysFont('arial', 21).render(str(self.life) + "/" + str(self.initialLife), True, (255, 0, 0))
         else:
-            self.lifeText = pygame.font.SysFont('arial', 21).render(str(self.life) + "/" + str(self.initialLife), True, (0, 0, 0))
+            a = 2
+            #self.lifeText = pygame.font.SysFont('arial', 21).render(str(self.life) + "/" + str(self.initialLife), True, (0, 0, 0))
 
     def isDead(self):
         if self.life <= 0:

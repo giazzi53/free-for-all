@@ -7,7 +7,7 @@ Ranking.SetUsername()
 
 pygame.init()
 pygame.mixer.init(frequency=22050, size=-16, channels=2, buffer=256)
-pygame.mixer.music.load('Images/Audio/background_music.mp3')
+pygame.mixer.music.load('Audio/background_music.mp3')
 pygame.mixer.music.set_volume(0.1)
 pygame.mixer.music.play(-1)
 
@@ -34,6 +34,8 @@ while not game_map.windowClosed:
         game_map.shotsInteractions()
 
         game_map.bulletsInteractions()
+
+        game_map.lifeInteractions()
         
         game_map.monstersInteractions()
 

@@ -25,7 +25,7 @@ class Player():
         self.canSpawnBullets = True
         self.score = 0
         self.scoreText = pygame.font.SysFont('arial', 30).render("Score: " + str(self.score), True, (0, 0, 0))
-        self.shotAudio = pygame.mixer.Sound('Images/Audio/shot.wav')
+        self.shotAudio = pygame.mixer.Sound('Audio/shot.wav')
   
     def setPosition(self, position):
         self.position = position
@@ -105,6 +105,9 @@ class Player():
 
     def addAmmo(self, amount):
         self.ammo += amount
+
+    def addLife(self):
+        self.life += 1
 
     def addScore(self, amount):
         self.score += amount

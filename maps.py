@@ -6,7 +6,7 @@ import Ranking
 from monsters import Monster
 from players import Player
 from images_handler import Images
-from bullets import Bullet
+from special_items import SpecialItem
 from barriers import Barrier
 
 SCREEN_HEIGHT = 600
@@ -20,6 +20,7 @@ class Map():
         #self.allies = []
         self.bullets = []
         self.barriers = []
+        self.lives = []
         self.level = 1
         self.quant = 0
         self.clicks = 0
@@ -105,7 +106,8 @@ class Map():
 
     def spawnBullets(self, amount):
         for i in range(amount):
-            self.bullets.append(Bullet())
+            self.bullets.append(SpecialItem())
+            self.lives.append(SpecialItem())
 
     def showPlayerInfos(self):
         self.screen.blit(self.player1.img, self.player1.position)
@@ -156,11 +158,21 @@ class Map():
 
     def bulletsInteractions(self):
         for bullet in self.bullets:
-            self.screen.blit(bullet.img, bullet.position)
+            self.screen.blit(bullet.ammoImg, bullet.position)
             if self.player1.is_collided_with(bullet):
                 bullet.reloadAudio.play()
                 self.player1.addAmmo(5)
                 self.bullets.remove(bullet)
+                if len(self.bullets) == 0:
+                    self.player1.canSpawnBullets = True
+
+    def lifeInteractions(self):
+        for life in self.lives:
+            self.screen.blit(life.lifeImg, life.position)
+            if self.player1.is_collided_with(life):
+                life.healAudio.play()
+                self.player1.addLife()
+                self.lives.remove(life)
                 if len(self.bullets) == 0:
                     self.player1.canSpawnBullets = True
 
@@ -300,11 +312,7 @@ class Map():
     def defineScenario(self, scenario):
         self.scenario = scenario
         self.scenarioSelected = True
-
-    '''def spawnSpecialItems(self, scenario):
-        if self.scenario == 'ringue':
-            self.screen.blit(pygame.image.load('Images/Scenarios/' + self.scenario + '.png'), (0, 0))
-    '''
+   
     
             
             

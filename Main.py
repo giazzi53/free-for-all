@@ -28,39 +28,18 @@ while not game_map.windowClosed:
 
     elif game_map.inGame:
         game_map.blitBackgroundMap()   
-        
-        game_map.player1.animatePlayerSprite()
-
+        game_map.player.animatePlayerSprite()
         game_map.shotsInteractions()
-
         game_map.bulletsInteractions()
-
         game_map.lifeInteractions()
-        
         game_map.monstersInteractions()
-
         game_map.generateMonsters()
-
         game_map.generateBarriers()
-
         game_map.barriersInteractions()
-
         game_map.showPlayerInfos()
         pygame.display.update()
    
     else:
         game_map.endOfGame()
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                game_map.inGame = False
-                game_map.windowClosed = True
-                pygame.quit()
-            if event.type == pygame.MOUSEBUTTONUP:
-                pos = pygame.mouse.get_pos()
-                if(pos[0] >= 380 and pos[0] <= 600 and pos[1] >= 630 and pos[1] <= 690):
-                    game_map = Map()
-                    #game_map.spawnAllies(1, game_map.images.getAngelingImages(), 1)
-                    game_map.spawnMonsters(1, game_map.images.getPoringImages(), 1, False)
 
     game_map.checkEvents()

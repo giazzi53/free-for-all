@@ -85,8 +85,3 @@ class Images():
 
     def getCactus(self):
         return self.cactus
-
-    '''
-    def changeImagesSize(self, images, size):
-        return [[pygame.transform.scale(images[0][i], size) for i in range(len(images[0]))], [pygame.transform.scale(images[1][i], size) for i in range(len(images[1]))]]
-    '''

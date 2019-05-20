@@ -17,18 +17,16 @@ class Map():
     def __init__(self):
         self.barriersExist = False
         self.monsters = []
-        #self.allies = []
         self.bullets = []
         self.barriers = []
         self.lives = []
-        self.level = 1
+        self.level = None
         self.quant = 0
-        self.clicks = 0
         self.playersSelected = False
         self.scenarioSelected = False
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.images = Images()
-        self.bossTime = True
+        #self.bossTime = True
         self.inGame = True
         self.win = False
         self.windowClosed = False
@@ -47,17 +45,11 @@ class Map():
         self.playerAndMapImage = pygame.image.load('Images/Menus/playerAndMap.jpg')
         self.scenario = None
 
-    def spawnMonsters(self, amount, image, life, isBoss):
-        
+    #def spawnMonsters(self, amount, image, life, isBoss):
+    def spawnMonsters(self, amount, image, life):
         for i in range(amount):
-            #monsters spawn at left side
-            #self.monsters.append(Monster((rd.randint(-(70+(30*amount)), -70), rd.randint(0, 700)), image, life, isBoss))
-            #monsters spawn at top side
-            self.monsters.append(Monster((rd.randint(0, 1000), rd.randint(-(70+(30*amount)), -70)), image, life, isBoss))
-            #monsters spawn at right side
-            #self.monsters.append(Monster((rd.randint(1070, 1070+(30*amount)), rd.randint(0, 700)), image, life, isBoss))
-            #monsters spawn at bot side
-            #self.monsters.append(Monster((rd.randint(0, 1000), rd.randint(770, 770+(30*amount))), image, life, isBoss))
+            #self.monsters.append(Monster((rd.randint(0, 1000), rd.randint(-(70+(30*amount)), -70)), image, life, isBoss))
+            self.monsters.append(Monster((rd.randint(0, 1000), rd.randint(-(70+(30*amount)), -70)), image, life))
 
     def spawnBarrier(self,image,position):
         self.barriers.append(Barrier(self,image,position))            
@@ -82,43 +74,39 @@ class Map():
                 self.spawnBarrier(self.images.getRock(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
                 self.barriersExist = True
             
-
     def generateMonsters(self):
         if self.scenario == 'ringue':
             if(self.quant <= 2): 
                 randomAmount1 = rd.randint(1, 3)
-                self.spawnMonsters(randomAmount1, self.images.getJoaoLourao(), 1, False)
+                self.spawnMonsters(randomAmount1, self.images.getJoaoLourao(), 1)
                 randomAmount2 = rd.randint(1, 3)
-                self.spawnMonsters(randomAmount2, self.images.getMikeTyson(), 1, False)
+                self.spawnMonsters(randomAmount2, self.images.getMikeTyson(), 1)
                 self.quant += (randomAmount1 + randomAmount2)
         elif self.scenario == 'floresta':
             if(self.quant <= 3): 
                 randomAmount1 = rd.randint(1, 4)
-                self.spawnMonsters(randomAmount1, self.images.getJaguar(), 1, False)
+                self.spawnMonsters(randomAmount1, self.images.getJaguar(), 1)
                 randomAmount2 = rd.randint(1, 4)
-                self.spawnMonsters(randomAmount2, self.images.getSnake(), 1, False)
+                self.spawnMonsters(randomAmount2, self.images.getSnake(), 1)
                 self.quant += (randomAmount1 + randomAmount2)
         elif self.scenario == 'deserto':
             if(self.quant <= 4): 
                 randomAmount1 = rd.randint(1, 5)
-                self.spawnMonsters(randomAmount1, self.images.getScorpion(), 1, False)
+                self.spawnMonsters(randomAmount1, self.images.getScorpion(), 1)
                 randomAmount2 = rd.randint(1, 5)
-                self.spawnMonsters(randomAmount2, self.images.getMummy(), 1, False)
+                self.spawnMonsters(randomAmount2, self.images.getMummy(), 1)
                 self.quant += (randomAmount1 + randomAmount2)
-      #for i in range(3):
-            #del self.monsters[rd.randint(0, len(self.monsters)-1)]
-        #self.monsters[0].changeMonsterVelocity(3)
-
+     
     def spawnBullets(self, amount):
         for i in range(amount):
             self.bullets.append(SpecialItem())
             self.lives.append(SpecialItem())
 
     def showPlayerInfos(self):
-        self.screen.blit(self.player1.img, self.player1.position)
-        self.player1.showLife(self.screen)
-        self.player1.showScore(self.screen)
-        self.player1.showAmmoAmount(self.screen)
+        self.screen.blit(self.player.img, self.player.position)
+        self.player.showLife(self.screen)
+        self.player.showScore(self.screen)
+        self.player.showAmmoAmount(self.screen)
         self.showGuiLevel = True
         self.start_time = time.time()
 
@@ -128,91 +116,79 @@ class Map():
     def barriersInteractions(self):
         for barrier in self.barriers:
             barrier.drawBarrier(self.screen)
-            if self.player1.is_collided_with(barrier):
-                print(self.player1.position)
-                self.player1.position = list(self.player1.position)
-                self.player1.position[0] -= 10 
-                self.player1.position[1] -= 10
-                self.player1.position = tuple(self.player1.position)
+            if self.player.is_collided_with(barrier):
+                print(self.player.position)
+                self.player.position = list(self.player.position)
+                self.player.position[0] -= 10 
+                self.player.position[1] -= 10
+                self.player.position = tuple(self.player.position)
 
-                print(self.player1.position)
-
+                print(self.player.position)
 
     def monstersInteractions(self):
         for monster in self.monsters:
-            monster.move(self.player1)
+            monster.move(self.player)
             monster.drawMonster(self.screen)
-            if self.player1.is_collided_with(monster):
+            if self.player.is_collided_with(monster):
                 monster.damageAudio.play()
-                if monster.isBoss:
-                    self.player1.damagePlayer(5)
-                else:
-                    self.player1.damagePlayer(1)
+                self.player.damagePlayer()
                 self.monsters.remove(monster)
-                if(self.player1.isPlayerDead()):
+                if(self.player.isPlayerDead()):
                     self.inGame = False
 
-                
-
             else:
-                for shot in self.player1.shots:
+                for shot in self.player.shots:
                     if shot.is_collided_with(monster):
                         monster.damageMonster(1)
                         if monster.isDead():
                             self.monsters.remove(monster)
-                            self.player1.addScore(100)
+                            self.player.addScore(100)
                             self.quant-=1
-                        self.player1.shots.remove(shot)
-
-            
+                        self.player.shots.remove(shot)
 
     def bulletsInteractions(self):
         for bullet in self.bullets:
             self.screen.blit(bullet.ammoImg, bullet.position)
-            if self.player1.is_collided_with(bullet):
+            if self.player.is_collided_with(bullet):
                 bullet.reloadAudio.play()
-                self.player1.addAmmo(5)
+                self.player.addAmmo(5)
                 self.bullets.remove(bullet)
                 if len(self.bullets) == 0:
-                    self.player1.canSpawnBullets = True
+                    self.player.canSpawnBullets = True
 
     def lifeInteractions(self):
         for life in self.lives:
             self.screen.blit(life.lifeImg, life.position)
-            if self.player1.is_collided_with(life):
+            if self.player.is_collided_with(life):
                 life.healAudio.play()
-                self.player1.addLife()
+                self.player.addLife()
                 self.lives.remove(life)
                 if len(self.bullets) == 0:
-                    self.player1.canSpawnBullets = True
+                    self.player.canSpawnBullets = True
 
     def shotsInteractions(self):
-        for shot in self.player1.shots:
+        for shot in self.player.shots:
             shot.move()
             self.screen.blit(shot.img, shot.position)
             if shot.position[0] > SCREEN_WIDTH or shot.position[0] < 0:
-                self.player1.shots.remove(shot)
+                self.player.shots.remove(shot)
             elif shot.position[1] > SCREEN_HEIGHT or shot.position[1] < 0:
-                self.player1.shots.remove(shot)
+                self.player.shots.remove(shot)
 
     def checkEvents(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP]:
-            self.player1.grau = 0
-            self.player1.moveUp()
-            self.player1.passo += 1
+            self.player.grau = 0
+            self.player.moveUp()
         elif keys[pygame.K_DOWN]:
-            self.player1.grau = 180
-            self.player1.moveDown()
-            self.player1.passo += 1
+            self.player.grau = 180
+            self.player.moveDown()
         elif keys[pygame.K_RIGHT]:
-            self.player1.grau = 90
-            self.player1.moveRight()
-            self.player1.passo += 1
+            self.player.grau = 90
+            self.player.moveRight()
         elif keys[pygame.K_LEFT]:
-            self.player1.grau = 270
-            self.player1.moveLeft()
-            self.player1.passo += 1
+            self.player.grau = 270
+            self.player.moveLeft()
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -221,7 +197,7 @@ class Map():
                 pygame.quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    self.player1.shoot(self)
+                    self.player.shoot(self)
             if event.type == pygame.MOUSEBUTTONUP:
                 pos = pygame.mouse.get_pos()
 
@@ -232,7 +208,7 @@ class Map():
             self.screen.blit(self.gameOverBackgroundImage, (0, 0))
 
         if self.setRank:    
-            Ranking.SetRank(self.player1.score, self.level, Ranking.GetUsername())
+            Ranking.SetRank(self.player.score, self.level, Ranking.GetUsername())
             Ranking.LoadRanking()
             self.ranking = Ranking.GetRanking()
             self.setRank = False
@@ -277,7 +253,6 @@ class Map():
                 if(pos[0] >= 234 and pos[0] <= 726 and pos[1] >= 481 and pos[1] <= 554):
                     self.initialScreen = True
                     self.instructionsScreen = False
-                    print("Voltar")
                  
     def playerAndMapScreen(self):
         self.screen.blit(self.playerAndMapImage, (0, 0))
@@ -302,11 +277,11 @@ class Map():
 
                 #escolhendo o mapa
                 if(pos[0] >= 21 and pos[0] <= 254 and pos[1] >= 382 and pos[1] <= 486):
-                    self.defineScenario('ringue')
+                    self.defineScenario('ringue', 'facil')
                 elif(pos[0] >= 337 and pos[0] <= 542 and pos[1] >= 382 and pos[1] <= 486):
-                    self.defineScenario('floresta')
+                    self.defineScenario('floresta', 'medio')
                 elif(pos[0] >= 628 and pos[0] <= 848 and pos[1] >= 382 and pos[1] <= 486):
-                    self.defineScenario('deserto')
+                    self.defineScenario('deserto', 'dificil')
 
                 #se tiver selecionado os dois personagens e o mapa, pode continuar
                 if self.playersSelected and self.scenarioSelected:
@@ -316,16 +291,10 @@ class Map():
                         self.selectScreen = False
 
     def definePlayer(self, imageName, shotName):
-        self.player1 = Player((100, 100), pygame.image.load('Images/Characters/' + imageName + '0.png'), imageName, shotName)
+        self.player = Player((100, 100), pygame.image.load('Images/Characters/' + imageName + '0.png'), imageName, shotName)
         self.playersSelected = True
 
-    def defineScenario(self, scenario):
+    def defineScenario(self, scenario, difficulty):
         self.scenario = scenario
+        self.level = difficulty
         self.scenarioSelected = True
-   
-    
-            
-            
-
-                
-                    

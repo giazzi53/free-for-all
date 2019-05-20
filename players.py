@@ -13,7 +13,6 @@ class Player():
         self.shotName = shotName
         self.rect = pygame.Rect(position[0]+8, position[1]+5, img.get_width()-16, img.get_height()-10)
         self.grau = 0
-        self.passo = 1
         self.vel = 7
         self.life = 5
         self.heartText = pygame.font.SysFont('arial', 30).render("Life: ", True, (0, 0, 0))
@@ -41,10 +40,6 @@ class Player():
             self.grau = 0
         if self.grau < 0:
             self.grau = 360 + self.grau
-
-        if self.passo > 3:
-            self.passo = 1
-            
         image = pygame.image.load('Images/Characters/' + self.imageName + str(self.grau) + '.png') 
         self.setImage(image)
 
@@ -71,8 +66,8 @@ class Player():
     def is_collided_with(self, sprite):
         return self.rect.colliderect(sprite.rect)
 
-    def damagePlayer(self, amount):
-        self.life -= amount
+    def damagePlayer(self):
+        self.life -= 1
 
     def isPlayerDead(self):
         return self.life <= 0

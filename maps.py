@@ -116,15 +116,13 @@ class Map():
     def barriersInteractions(self):
         for barrier in self.barriers:
             barrier.drawBarrier(self.screen)
-            if self.player.is_collided_with(barrier):
-                print(self.player.position)
-                self.player.position = list(self.player.position)
-                self.player.position[0] -= 10 
-                self.player.position[1] -= 10
-                self.player.position = tuple(self.player.position)
-
-                print(self.player.position)
-
+            # if self.player.is_collided_with(barrier):
+            #     print(self.player.position)
+                # self.player.position = list(self.player.position)
+                # self.player.position[0] -= 10 
+                # self.player.position[1] -= 10
+                # self.player.position = tuple(self.player.position)
+                
     def monstersInteractions(self):
         for monster in self.monsters:
             monster.move(self.player)
@@ -176,20 +174,79 @@ class Map():
                 self.player.shots.remove(shot)
 
     def checkEvents(self):
+        velocity = 7
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP]:
-            self.player.grau = 0
-            self.player.moveUp()
+            for barrier in self.barriers:
+                if not self.player.is_collided_with(barrier):
+                    self.player.setVelocityUp(velocity)
+                    self.player.setVelocityDown(self.player.getVelocityDown())
+                    self.player.setVelocityLeft(self.player.getVelocityLeft())
+                    self.player.setVelocityRight(self.player.getVelocityRight())
+
+
+                    self.player.grau = 0
+                    self.player.moveUp()
+                else:
+                    print("colidiu")
+                    self.player.setVelocityLeft(velocity)
+                    self.player.setVelocityRight(velocity)
+                    self.player.setVelocityDown(velocity)
+                    self.player.setVelocityUp(self.player.getVelocityUp()*-1)
+                    self.player.moveUp()
+
         elif keys[pygame.K_DOWN]:
-            self.player.grau = 180
-            self.player.moveDown()
+            for barrier in self.barriers:
+                if not self.player.is_collided_with(barrier):
+                    self.player.setVelocityDown(velocity)
+                    self.player.setVelocityUp(self.player.getVelocityUp())
+                    self.player.setVelocityLeft(self.player.getVelocityLeft())
+                    self.player.setVelocityRight(self.player.getVelocityRight())
+                    self.player.grau = 180
+                    self.player.moveDown()
+                else:
+                    print("colidiu")
+                    self.player.setVelocityLeft(velocity)
+                    self.player.setVelocityRight(velocity)
+                    self.player.setVelocityDown(self.player.getVelocityDown()*-1)
+                    self.player.setVelocityUp(velocity)
+                    self.player.moveDown()
+
         elif keys[pygame.K_RIGHT]:
-            self.player.grau = 90
-            self.player.moveRight()
+            for barrier in self.barriers:
+                if not self.player.is_collided_with(barrier):
+                    self.player.setVelocityRight(velocity)
+                    self.player.setVelocityUp(self.player.getVelocityUp())
+                    self.player.setVelocityLeft(self.player.getVelocityLeft())
+                    self.player.setVelocityDown(self.player.getVelocityDown())
+                    self.player.grau = 90
+                    self.player.moveRight()
+                else:
+                    print("colidiu")
+                    self.player.setVelocityLeft(velocity)
+                    self.player.setVelocityRight(self.player.getVelocityRight()*-1)
+                    self.player.setVelocityDown(velocity)
+                    self.player.setVelocityUp(velocity)
+                    self.player.moveRight()
+
         elif keys[pygame.K_LEFT]:
-            self.player.grau = 270
-            self.player.moveLeft()
-        
+            for barrier in self.barriers:
+                if not self.player.is_collided_with(barrier):
+                    self.player.setVelocityLeft(velocity)
+                    self.player.setVelocityUp(self.player.getVelocityUp())
+                    self.player.setVelocityRight(self.player.getVelocityRight())
+                    self.player.setVelocityDown(self.player.getVelocityDown())
+                    self.player.grau = 270
+                    self.player.moveLeft()
+                else:
+                    print("colidiu")
+                    self.player.setVelocityLeft(self.player.getVelocityLeft()*-1)
+                    self.player.setVelocityRight(velocity)
+                    self.player.setVelocityDown(velocity)
+                    self.player.setVelocityUp(velocity)
+                    self.player.moveLeft()
+                    
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.inGame = False

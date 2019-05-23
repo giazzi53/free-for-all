@@ -13,7 +13,10 @@ class Player():
         self.shotName = shotName
         self.rect = pygame.Rect(position[0]+8, position[1]+5, img.get_width()-16, img.get_height()-10)
         self.grau = 0
-        self.vel = 7
+        self.velUp = 7
+        self.velDown = 7
+        self.velLeft = 7
+        self.velRight = 7
         self.life = 5
         self.heartText = pygame.font.SysFont('arial', 30).render("Life: ", True, (0, 0, 0))
         self.heartImage = pygame.image.load('Images/Special items/heart.png')
@@ -32,6 +35,30 @@ class Player():
     def setImage(self, image):
         self.img = image
 
+    def getVelocityLeft(self):
+        return self.velLeft
+    
+    def setVelocityLeft(self,vel):
+        self.velLeft = vel
+
+    def getVelocityRight(self):
+            return self.velRight
+
+    def setVelocityRight(self,vel):
+        self.velRight = vel
+
+    def getVelocityDown(self):
+            return self.velDown
+
+    def setVelocityDown(self,vel):
+        self.velDown = vel
+
+    def getVelocityUp(self):
+            return self.velUp
+
+    def setVelocityUp(self,vel):
+        self.velUp = vel
+
     def setRect(self, rect):
         self.rect = rect
 
@@ -45,23 +72,24 @@ class Player():
 
     def moveUp(self):
         if self.position[1] > 0:
-            self.setPosition((self.position[0], self.position[1]-self.vel))
-            self.rect.y -= self.vel
+            self.setPosition((self.position[0], self.position[1] - self.velUp))
+            self.rect.y -= self.velUp
         
     def moveDown(self):
         if self.position[1] < SCREEN_HEIGHT - self.img.get_height():
-            self.setPosition((self.position[0], self.position[1]+self.vel))
-            self.rect.y += self.vel
+            self.setPosition((self.position[0], self.position[1] + self.velDown))
+            self.rect.y += self.velDown
 
     def moveRight(self):
         if self.position[0] < SCREEN_WIDTH - self.img.get_width():
-            self.setPosition((self.position[0]+self.vel, self.position[1]))
-            self.rect.x += self.vel
+            self.setPosition((self.position[0] + self.velRight, self.position[1]))
+            self.rect.x += self.velRight
 
     def moveLeft(self):
         if self.position[0] > 0:
-            self.setPosition((self.position[0]-self.vel, self.position[1]))
-            self.rect.x -= self.vel
+            self.setPosition((self.position[0] - self.velLeft, self.position[1]))
+            self.rect.x -= self.velLeft
+            print(self.rect.x)
 
     def is_collided_with(self, sprite):
         return self.rect.colliderect(sprite.rect)

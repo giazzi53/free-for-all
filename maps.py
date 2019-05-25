@@ -59,23 +59,25 @@ class Map():
     def generateBarriers(self):
         if(self.barriersExist == False):
             if(self.scenario == 'ringue'):
-                print("Ringue")
-                self.spawnBarrier(self.images.getChair(),(rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
-                self.spawnBarrier(self.images.getBelt(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
-                self.barriersExist = True
+                self.generateRandomBarriers(1, 2, self.images.getChair())
+                self.generateRandomBarriers(1, 2, self.images.getBelt())
                 
             elif self.scenario == 'floresta':
-                self.spawnBarrier(self.images.getTrunk(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
-                self.spawnBarrier(self.images.getTree(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
-                self.spawnBarrier(self.images.getLake(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
-                self.barriersExist = True
+                self.generateRandomBarriers(1, 3, self.images.getTrunk())
+                self.generateRandomBarriers(1, 3, self.images.getTree())
+                self.generateRandomBarriers(1, 3, self.images.getLake())
 
             elif self.scenario == 'deserto':
-                self.spawnBarrier(self.images.getSand(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
-                self.spawnBarrier(self.images.getCactus(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
-                self.spawnBarrier(self.images.getRock(), (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
-                self.barriersExist = True
-            
+                self.generateRandomBarriers(2, 4, self.images.getSand())
+                self.generateRandomBarriers(2, 4, self.images.getCactus())
+                self.generateRandomBarriers(2, 4, self.images.getRock())
+
+    def generateRandomBarriers(self, floor, roof, image):
+        random = rd.randint(floor, roof)
+        for a in range(random):
+            self.spawnBarrier(image, (rd.randint(0,SCREEN_WIDTH-30), rd.randint(0,SCREEN_HEIGHT-30)))
+        self.barriersExist = True
+
     def generateMonsters(self):
         if self.scenario == 'ringue':
             if(self.quant <= 2): 

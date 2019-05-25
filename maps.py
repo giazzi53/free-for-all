@@ -143,6 +143,7 @@ class Map():
         for bullet in self.bullets:
             self.screen.blit(bullet.ammoImg, bullet.position)
             if self.player.is_collided_with(bullet):
+                self.player.addScore(50)
                 bullet.reloadAudio.play()
                 self.player.addAmmo(5)
                 self.bullets.remove(bullet)
@@ -153,6 +154,7 @@ class Map():
         for life in self.lives:
             self.screen.blit(life.lifeImg, life.position)
             if self.player.is_collided_with(life):
+                self.player.addScore(50)
                 life.healAudio.play()
                 self.player.addLife()
                 self.lives.remove(life)

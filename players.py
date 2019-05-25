@@ -6,17 +6,15 @@ SCREEN_WIDTH = 900
 
 class Player():
 
-    def __init__(self, position, img, imageName, shotName, life):
+    def __init__(self, position, img, imageName, shotName, life, speed):
         self.position = position
         self.img = img
         self.imageName = imageName
         self.shotName = shotName
         self.rect = pygame.Rect(position[0]+8, position[1]+5, img.get_width()-16, img.get_height()-10)
         self.grau = 0
-        self.velUp = 7
-        self.velDown = 7
-        self.velLeft = 7
-        self.velRight = 7
+        self.speed = speed
+        self.oldSpeed = self.speed
         self.life = life
         self.heartText = pygame.font.SysFont('arial', 30).render("Life: ", True, (0, 0, 0))
         self.heartImage = pygame.image.load('Images/Special items/heart.png')
@@ -35,30 +33,6 @@ class Player():
     def setImage(self, image):
         self.img = image
 
-    def getVelocityLeft(self):
-        return self.velLeft
-    
-    def setVelocityLeft(self,vel):
-        self.velLeft = vel
-
-    def getVelocityRight(self):
-            return self.velRight
-
-    def setVelocityRight(self,vel):
-        self.velRight = vel
-
-    def getVelocityDown(self):
-            return self.velDown
-
-    def setVelocityDown(self,vel):
-        self.velDown = vel
-
-    def getVelocityUp(self):
-            return self.velUp
-
-    def setVelocityUp(self,vel):
-        self.velUp = vel
-
     def setRect(self, rect):
         self.rect = rect
 
@@ -70,26 +44,31 @@ class Player():
         image = pygame.image.load('Images/Characters/' + self.imageName + str(self.grau) + '.png') 
         self.setImage(image)
 
+    def makeSlower(self):
+        self.speed -= 5
+        
+    def returnNormalSpeed(self):
+        self.speed = self.oldSpeed
+    
     def moveUp(self):
         if self.position[1] > 0:
-            self.setPosition((self.position[0], self.position[1] - self.velUp))
-            self.rect.y -= self.velUp
+            self.setPosition((self.position[0], self.position[1] - self.speed))
+            self.rect.y -= self.speed
         
     def moveDown(self):
         if self.position[1] < SCREEN_HEIGHT - self.img.get_height():
-            self.setPosition((self.position[0], self.position[1] + self.velDown))
-            self.rect.y += self.velDown
+            self.setPosition((self.position[0], self.position[1] + self.speed))
+            self.rect.y += self.speed
 
     def moveRight(self):
         if self.position[0] < SCREEN_WIDTH - self.img.get_width():
-            self.setPosition((self.position[0] + self.velRight, self.position[1]))
-            self.rect.x += self.velRight
+            self.setPosition((self.position[0] + self.speed, self.position[1]))
+            self.rect.x += self.speed
 
     def moveLeft(self):
         if self.position[0] > 0:
-            self.setPosition((self.position[0] - self.velLeft, self.position[1]))
-            self.rect.x -= self.velLeft
-            print(self.rect.x)
+            self.setPosition((self.position[0] - self.speed, self.position[1]))
+            self.rect.x -= self.speed
 
     def is_collided_with(self, sprite):
         return self.rect.colliderect(sprite.rect)

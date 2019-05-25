@@ -117,13 +117,7 @@ class Map():
     def barriersInteractions(self):
         for barrier in self.barriers:
             barrier.drawBarrier(self.screen)
-            # if self.player.is_collided_with(barrier):
-            #     print(self.player.position)
-                # self.player.position = list(self.player.position)
-                # self.player.position[0] -= 10 
-                # self.player.position[1] -= 10
-                # self.player.position = tuple(self.player.position)
-                
+                           
     def monstersInteractions(self):
         for monster in self.monsters:
             monster.move(self.player)
@@ -175,80 +169,46 @@ class Map():
                 self.player.shots.remove(shot)
 
     def checkEvents(self):
-        velocity = 7
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP]:
             for barrier in self.barriers:
                 if not self.player.is_collided_with(barrier):
-                    self.player.setVelocityUp(velocity)
                     self.player.grau = 0
                     self.player.moveUp()
                 else:
-                    print("colidiu")
-                    self.player.setVelocityLeft(velocity)
-                    self.player.setVelocityRight(velocity)
-                    self.player.setVelocityDown(velocity)
-                    self.player.setVelocityUp(0)
+                    self.player.makeSlower()
                     self.player.moveUp()
-                    print("Velocidade UP:",self.player.getVelocityUp())
-                    print("Velocidade Down:",self.player.getVelocityDown())
-                    print("Velocidade Left:",self.player.getVelocityLeft())
-                    print("Velocidade Right:",self.player.getVelocityRight())
+                    self.player.returnNormalSpeed()
 
         elif keys[pygame.K_DOWN]:
             for barrier in self.barriers:
                 if not self.player.is_collided_with(barrier):
-                    self.player.setVelocityDown(velocity)
                     self.player.grau = 180
                     self.player.moveDown()
                 else:
-                    print("colidiu")
-                    self.player.setVelocityLeft(velocity)
-                    self.player.setVelocityRight(velocity)
-                    self.player.setVelocityDown(0)
-                    self.player.setVelocityUp(velocity)
+                    self.player.makeSlower()
                     self.player.moveDown()
-                    print("Velocidade UP:",self.player.getVelocityUp())
-                    print("Velocidade Down:",self.player.getVelocityDown())
-                    print("Velocidade Left:",self.player.getVelocityLeft())
-                    print("Velocidade Right:",self.player.getVelocityRight())
+                    self.player.returnNormalSpeed()
 
         elif keys[pygame.K_RIGHT]:
             for barrier in self.barriers:
                 if not self.player.is_collided_with(barrier):
-                    self.player.setVelocityRight(velocity)
                     self.player.grau = 90
                     self.player.moveRight()
                 else:
-                    print("colidiu")
-                    self.player.setVelocityLeft(velocity)
-                    self.player.setVelocityRight(0)
-                    self.player.setVelocityDown(velocity)
-                    self.player.setVelocityUp(velocity)
+                    self.player.makeSlower()
                     self.player.moveRight()
-                    print("Velocidade UP:",self.player.getVelocityUp())
-                    print("Velocidade Down:",self.player.getVelocityDown())
-                    print("Velocidade Left:",self.player.getVelocityLeft())
-                    print("Velocidade Right:",self.player.getVelocityRight())
+                    self.player.returnNormalSpeed()
 
         elif keys[pygame.K_LEFT]:
             for barrier in self.barriers:
                 if not self.player.is_collided_with(barrier):
-                    self.player.setVelocityLeft(velocity)
                     self.player.grau = 270
                     self.player.moveLeft()
                 else:
-                    print("colidiu")
-                    self.player.setVelocityLeft(0)
-                    self.player.setVelocityRight(velocity)
-                    self.player.setVelocityDown(velocity)
-                    self.player.setVelocityUp(velocity)
+                    self.player.makeSlower()
                     self.player.moveLeft()
-                    print("Velocidade UP:",self.player.getVelocityUp())
-                    print("Velocidade Down:",self.player.getVelocityDown())
-                    print("Velocidade Left:",self.player.getVelocityLeft())
-                    print("Velocidade Right:",self.player.getVelocityRight())
-                    
+                    self.player.returnNormalSpeed()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -298,15 +258,10 @@ class Map():
                 pygame.quit()
             if event.type == pygame.MOUSEBUTTONUP:
                 pos = pygame.mouse.get_pos()
-                print(pos)
                 if(pos[0] >= 862 and pos[0] <= 893 and pos[1] >= 15 and pos[1] <= 47):
                     if(pygame.mixer.music.get_volume() > 0):
-                        print("Mute")
-                        # self.screen.blit(self.muteIcon,(850,5))
                         pygame.mixer.music.set_volume(0)
                     else:
-                        print("sound")
-                        # self.screen.blit(self.soundIcon,(850,5))
                         pygame.mixer.music.set_volume(0.1)
 
                 if(pos[0] >= 306 and pos[0] <= 620 and pos[1] >= 444 and pos[1] <= 496):
@@ -330,15 +285,10 @@ class Map():
                 pygame.quit()
             if event.type == pygame.MOUSEBUTTONUP:
                 pos = pygame.mouse.get_pos()   
-                print(pos)
                 if(pos[0] >= 862 and pos[0] <= 893 and pos[1] >= 15 and pos[1] <= 47):
                     if(pygame.mixer.music.get_volume() > 0):
-                        print("Mute")
-                    # self.screen.blit(self.muteIcon,(850,5))
                         pygame.mixer.music.set_volume(0)
                     else:
-                        print("sound")
-                        # self.screen.blit(self.soundIcon,(850,5))
                         pygame.mixer.music.set_volume(0.1)
                 if(pos[0] >= 234 and pos[0] <= 726 and pos[1] >= 481 and pos[1] <= 554):
                     self.initialScreen = True
@@ -362,21 +312,17 @@ class Map():
                 #escolhendo os personagens
                 if(pos[0] >= 862 and pos[0] <= 893 and pos[1] >= 15 and pos[1] <= 47):
                     if(pygame.mixer.music.get_volume() > 0):
-                        print("Mute")
-                    # self.screen.blit(self.muteIcon,(850,5))
                         pygame.mixer.music.set_volume(0)
                     else:
-                        print("sound")
-                        # self.screen.blit(self.soundIcon,(850,5))
                         pygame.mixer.music.set_volume(0.1)
                 if(pos[0] >= 7 and pos[0] <= 202 and pos[1] >= 148 and pos[1] <= 286):
-                    self.definePlayer('farmer', 'farmer-shot', 5)
+                    self.definePlayer('farmer', 'farmer-shot', 5, 5)
                 elif(pos[0] >= 220 and pos[0] <= 422 and pos[1] >= 148 and pos[1] <= 286):
-                    self.definePlayer('hooligan', 'hooligan-shot', 6)
+                    self.definePlayer('hooligan', 'hooligan-shot', 6, 6)
                 elif(pos[0] >= 452 and pos[0] <= 647 and pos[1] >= 148 and pos[1] <= 286):
-                    self.definePlayer('alien', 'alien-shot', 4)
+                    self.definePlayer('alien', 'alien-shot', 4, 2)
                 elif(pos[0] >= 668 and pos[0] <= 862 and pos[1] >= 148 and pos[1] <= 286):
-                    self.definePlayer('r0b07', 'r0b07-shot', 3)
+                    self.definePlayer('r0b07', 'r0b07-shot', 3, 3)
 
                 #escolhendo o mapa
                 if(pos[0] >= 21 and pos[0] <= 254 and pos[1] >= 382 and pos[1] <= 486):
@@ -393,8 +339,8 @@ class Map():
                         self.inGame = True
                         self.selectScreen = False
 
-    def definePlayer(self, imageName, shotName, life):
-        self.player = Player((100, 100), pygame.image.load('Images/Characters/' + imageName + '0.png'), imageName, shotName, life)
+    def definePlayer(self, imageName, shotName, life, speed):
+        self.player = Player((100, 100), pygame.image.load('Images/Characters/' + imageName + '0.png'), imageName, shotName, life, speed)
         self.playersSelected = True
 
     def defineScenario(self, scenario, difficulty):

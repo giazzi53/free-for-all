@@ -26,7 +26,6 @@ class Map():
         self.scenarioSelected = False
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.images = Images()
-        #self.bossTime = True
         self.inGame = True
         self.win = False
         self.windowClosed = False
@@ -45,10 +44,8 @@ class Map():
         self.playerAndMapImage = pygame.image.load('Images/Menus/playerAndMap.jpg')
         self.scenario = None
 
-    #def spawnMonsters(self, amount, image, life, isBoss):
     def spawnMonsters(self, amount, image, life):
         for i in range(amount):
-            #self.monsters.append(Monster((rd.randint(0, 1000), rd.randint(-(70+(30*amount)), -70)), image, life, isBoss))
             self.monsters.append(Monster((rd.randint(0, 1000), rd.randint(-(70+(30*amount)), -70)), image, life))
 
     def spawnBarrier(self,image,position):
@@ -326,13 +323,13 @@ class Map():
                 pos = pygame.mouse.get_pos()            
                 #escolhendo os personagens
                 if(pos[0] >= 7 and pos[0] <= 202 and pos[1] >= 148 and pos[1] <= 286):
-                    self.definePlayer('farmer', 'farmer-shot')
+                    self.definePlayer('farmer', 'farmer-shot', 5)
                 elif(pos[0] >= 220 and pos[0] <= 422 and pos[1] >= 148 and pos[1] <= 286):
-                    self.definePlayer('hooligan', 'hooligan-shot')
+                    self.definePlayer('hooligan', 'hooligan-shot', 6)
                 elif(pos[0] >= 452 and pos[0] <= 647 and pos[1] >= 148 and pos[1] <= 286):
-                    self.definePlayer('alien', 'alien-shot')
+                    self.definePlayer('alien', 'alien-shot', 4)
                 elif(pos[0] >= 668 and pos[0] <= 862 and pos[1] >= 148 and pos[1] <= 286):
-                    self.definePlayer('r0b07', 'r0b07-shot')
+                    self.definePlayer('r0b07', 'r0b07-shot', 3)
 
                 #escolhendo o mapa
                 if(pos[0] >= 21 and pos[0] <= 254 and pos[1] >= 382 and pos[1] <= 486):
@@ -349,8 +346,8 @@ class Map():
                         self.inGame = True
                         self.selectScreen = False
 
-    def definePlayer(self, imageName, shotName):
-        self.player = Player((100, 100), pygame.image.load('Images/Characters/' + imageName + '0.png'), imageName, shotName)
+    def definePlayer(self, imageName, shotName, life):
+        self.player = Player((100, 100), pygame.image.load('Images/Characters/' + imageName + '0.png'), imageName, shotName, life)
         self.playersSelected = True
 
     def defineScenario(self, scenario, difficulty):

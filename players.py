@@ -6,7 +6,7 @@ SCREEN_WIDTH = 900
 
 class Player():
 
-    def __init__(self, position, img, imageName, shotName):
+    def __init__(self, position, img, imageName, shotName, life):
         self.position = position
         self.img = img
         self.imageName = imageName
@@ -17,7 +17,7 @@ class Player():
         self.velDown = 7
         self.velLeft = 7
         self.velRight = 7
-        self.life = 5
+        self.life = life
         self.heartText = pygame.font.SysFont('arial', 30).render("Life: ", True, (0, 0, 0))
         self.heartImage = pygame.image.load('Images/Special items/heart.png')
         self.shots = []

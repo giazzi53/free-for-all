@@ -49,13 +49,6 @@ class Monster():
 
     def damageMonster(self, amount):
         self.life -= amount
-        '''if self.life == 1 and self.initialLife > 1:
-            a = 1
-            #self.lifeText = pygame.font.SysFont('arial', 21).render(str(self.life) + "/" + str(self.initialLife), True, (255, 0, 0))
-        else:
-            a = 2
-            #self.lifeText = pygame.font.SysFont('arial', 21).render(str(self.life) + "/" + str(self.initialLife), True, (0, 0, 0))
-        '''
     def isDead(self):
         if self.life <= 0:
             self.dieAudio.play()
